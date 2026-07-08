@@ -1,1 +1,93 @@
-<h1>Dhaka RAC Pension</h1>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pension Verification Portal</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+}
+
+.container{
+    max-width:500px;
+    margin:60px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,.15);
+}
+
+h2{
+    text-align:center;
+    color:#0b5ed7;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#0b5ed7;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#084298;
+}
+
+.result{
+    margin-top:20px;
+    padding:15px;
+    background:#eef7ee;
+    border-radius:8px;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Pension Verification Portal</h2>
+
+<input type="text" id="nid" placeholder="জাতীয় পরিচয়পত্র নম্বর">
+
+<button onclick="verify()">Verify</button>
+
+<div class="result" id="result">
+<h3>Verification Successful</h3>
+
+<p><strong>Name:</strong> Demo Pensioner</p>
+
+<p><strong>NID:</strong> 1234567890</p>
+
+<p><strong>Status:</strong> Active</p>
+
+</div>
+
+</div>
+
+<script>
+function verify(){
+document.getElementById("result").style.display="block";
+}
+</script>
+
+</body>
+</html>
