@@ -1,83 +1,173 @@
+// Google Apps Script Web App URL এখানে বসান
+const API_URL = "https://script.google.com/macros/s/AKfycbzaMqfC3KGvaRiWKyKvGrZI3DUWBcWHqBur4Vn_90an5A3Np-CFfJgsUQSNBQGtj5AS/exec";
+
+
 function verify(){
 
     const eppo = document.getElementById("eppo").value.trim();
     const nid = document.getElementById("nid").value.trim();
     const result = document.getElementById("result");
 
+
     if(eppo === "" || nid === ""){
-        result.innerHTML = "<div class='error'>⚠️ EPPO ও NID লিখুন।</div>";
+
+        result.innerHTML = `
+        <div class="error">
+            ⚠️ EPPO ও NID লিখুন।
+        </div>`;
+
         return;
     }
 
-    result.innerHTML = "<div class='loading'>⏳ যাচাই করা হচ্ছে...</div>";
+
+    result.innerHTML = `
+    <div class="loading">
+        ⏳ যাচাই করা হচ্ছে...
+    </div>`;
+
 
     fetch(API_URL,{
+
         method:"POST",
+
+        headers:{
+            "Content-Type":"text/plain"
+        },
+
         body:JSON.stringify({
+
             eppo:eppo,
             nid:nid,
             browser:navigator.userAgent
+
         })
+
     })
+
+
     .then(response=>{
+
         if(!response.ok){
-            throw new Error("HTTP Error : " + response.status);
+
+            throw new Error(
+                "HTTP Error : " + response.status
+            );
+
         }
+
         return response.json();
+
     })
+
+
     .then(data=>{
+
 
         if(data.status==="success"){
 
+
             result.innerHTML=`
+
             <div class="success">
-                ✅ <b>${data.name}</b><br><br>
+
+                ✅ <b>${data.name}</b>
+
+                <br><br>
+
                 যাচাইকরণ সফল হয়েছে।
+
+                <br><br>
+
+
                 <a class="joinBtn"
-                   href="${data.link}"
-                   target="_blank">
-                   📲 WhatsApp Community-তে যোগ দিন
+
+                href="${data.link}"
+
+                target="_blank">
+
+                📲 WhatsApp Community-তে যোগ দিন
+
                 </a>
+
+
             </div>`;
 
+
+
         }
+
         else if(data.status==="joined"){
 
+
             result.innerHTML=`
+
             <div class="success">
-                ✅ <b>${data.name}</b><br><br>
-                আপনি ইতোমধ্যে Join Link গ্রহণ করেছেন।
+
+            ✅ <b>${data.name}</b>
+
+            <br><br>
+
+            আপনি ইতোমধ্যে Join Link গ্রহণ করেছেন।
+
             </div>`;
 
+
         }
+
+
         else if(data.status==="notfound"){
 
+
             result.innerHTML=`
+
             <div class="error">
-                ❌ EPPO অথবা NID সঠিক নয়।
+
+            ❌ EPPO অথবা NID সঠিক নয়।
+
             </div>`;
 
+
         }
+
+
         else{
 
+
             result.innerHTML=`
+
             <div class="error">
-                ⚠️ ${data.message || "Server Error"}
+
+            ⚠️ ${data.message || "Server Error"}
+
             </div>`;
+
 
         }
 
-    })
-    .catch(err=>{
 
-        console.error(err);
+    })
+
+
+    .catch(error=>{
+
+
+        console.error(error);
+
 
         result.innerHTML=`
+
         <div class="error">
-            ❌ সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না।
-            <br><small>${err.message}</small>
+
+        ❌ সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না।
+
+        <br>
+
+        <small>${error.message}</small>
+
         </div>`;
 
+
     });
+
 
 }
