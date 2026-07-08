@@ -1,418 +1,83 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ঢাকা র‍্যাক পেনশনার কমিউনিটি</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Hind Siliguri',sans-serif;
-}
-
-body{
-
-background:linear-gradient(135deg,#00695c,#009688,#26a69a);
-
-min-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-padding:20px;
-
-}
-
-.card{
-
-width:100%;
-
-max-width:430px;
-
-background:#fff;
-
-border-radius:20px;
-
-overflow:hidden;
-
-box-shadow:0 10px 35px rgba(0,0,0,.25);
-
-animation:fadeIn .7s;
-
-}
-
-.header{
-
-background:#00695c;
-
-color:#fff;
-
-padding:22px;
-
-text-align:center;
-
-}
-
-.header h1{
-
-font-size:22px;
-
-margin-bottom:8px;
-
-}
-
-.header h2{
-
-font-size:17px;
-
-font-weight:500;
-
-}
-
-.logo{
-
-font-size:48px;
-
-margin-bottom:10px;
-
-}
-
-.content{
-
-padding:25px;
-
-}
-
-label{
-
-display:block;
-
-margin-bottom:8px;
-
-font-weight:600;
-
-color:#333;
-
-}
-
-input{
-
-width:100%;
-
-padding:14px;
-
-font-size:16px;
-
-border:1px solid #ccc;
-
-border-radius:10px;
-
-margin-bottom:18px;
-
-transition:.3s;
-
-}
-
-input:focus{
-
-outline:none;
-
-border:2px solid #009688;
-
-box-shadow:0 0 8px rgba(0,150,136,.25);
-
-}
-
-button{
-
-width:100%;
-
-padding:15px;
-
-font-size:17px;
-
-font-weight:bold;
-
-background:#00695c;
-
-color:#fff;
-
-border:none;
-
-border-radius:10px;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-button:hover{
-
-background:#004d40;
-
-}
-
-#result{
-
-margin-top:20px;
-
-text-align:center;
-
-line-height:30px;
-
-font-size:16px;
-
-}
-
-.success{
-
-color:#2e7d32;
-
-font-weight:bold;
-
-}
-
-.error{
-
-color:#d32f2f;
-
-font-weight:bold;
-
-}
-
-.loading{
-
-color:#1565c0;
-
-font-weight:bold;
-
-}
-
-.joinBtn{
-
-display:block;
-
-margin-top:15px;
-
-background:#25D366;
-
-color:#fff;
-
-padding:15px;
-
-text-decoration:none;
-
-border-radius:10px;
-
-font-weight:bold;
-
-font-size:17px;
-
-transition:.3s;
-
-}
-
-.joinBtn:hover{
-
-background:#1ebe5d;
-
-}
-
-.footer{
-
-padding:15px;
-
-background:#f5f5f5;
-
-text-align:center;
-
-font-size:13px;
-
-color:#666;
-
-}
-
-@keyframes fadeIn{
-
-from{
-
-opacity:0;
-
-transform:translateY(20px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-</style>
-
-</head>
-<body>
-
-<div class="card">
-
-<div class="header">
-
-<div class="logo">🏛️</div>
-
-<h1>বাংলাদেশ পানি উন্নয়ন বোর্ড</h1>
-
-<h2>ঢাকা র‍্যাক পেনশনার কমিউনিটি</h2>
-
-</div>
-
-<div class="content">
-
-<label>EPPO নম্বর</label>
-
-<input
-type="text"
-id="eppo"
-placeholder="আপনার EPPO নম্বর লিখুন"
-autocomplete="off">
-
-<label>জাতীয় পরিচয়পত্র (NID)</label>
-
-<input
-type="text"
-id="nid"
-placeholder="আপনার NID নম্বর লিখুন"
-autocomplete="off">
-
-<button onclick="verify()">
-
-🔍 যাচাই করুন
-
-</button>
-
-<div id="result"></div>
-
-</div>
-
-<div class="footer">
-
-© ২০২৬ বাংলাদেশ পানি উন্নয়ন বোর্ড<br>
-
-ঢাকা র‍্যাক পেনশনার কমিউনিটি
-
-</div>
-<script>
-
-const API_URL = "https://script.google.com/macros/s/AKfycbzaMqfC3KGvaRiWKyKvGrZI3DUWBcWHqBur4Vn_90an5A3Np-CFfJgsUQSNBQGtj5AS/exec";
-
 function verify(){
 
     const eppo = document.getElementById("eppo").value.trim();
     const nid = document.getElementById("nid").value.trim();
     const result = document.getElementById("result");
 
-    if(eppo==="" || nid===""){
-        result.innerHTML="<div class='error'>⚠️ EPPO ও NID লিখুন।</div>";
+    if(eppo === "" || nid === ""){
+        result.innerHTML = "<div class='error'>⚠️ EPPO ও NID লিখুন।</div>";
         return;
     }
 
-    result.innerHTML="<div class='loading'>⏳ যাচাই করা হচ্ছে...</div>";
+    result.innerHTML = "<div class='loading'>⏳ যাচাই করা হচ্ছে...</div>";
 
     fetch(API_URL,{
         method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
         body:JSON.stringify({
             eppo:eppo,
             nid:nid,
             browser:navigator.userAgent
         })
     })
-
-    .then(res=>res.json())
-
+    .then(response=>{
+        if(!response.ok){
+            throw new Error("HTTP Error : " + response.status);
+        }
+        return response.json();
+    })
     .then(data=>{
 
         if(data.status==="success"){
 
             result.innerHTML=`
             <div class="success">
-            ✅ ${data.name}<br><br>
-            যাচাইকরণ সফল হয়েছে।
-            <a class="joinBtn"
-               href="${data.link}"
-               target="_blank">
-               📲 WhatsApp Community-তে যোগ দিন
-            </a>
-            </div>
-            `;
+                ✅ <b>${data.name}</b><br><br>
+                যাচাইকরণ সফল হয়েছে।
+                <a class="joinBtn"
+                   href="${data.link}"
+                   target="_blank">
+                   📲 WhatsApp Community-তে যোগ দিন
+                </a>
+            </div>`;
 
         }
-
         else if(data.status==="joined"){
 
             result.innerHTML=`
             <div class="success">
-            ✅ ${data.name}<br><br>
-            আপনি ইতোমধ্যে Join Link গ্রহণ করেছেন।
-            </div>
-            `;
+                ✅ <b>${data.name}</b><br><br>
+                আপনি ইতোমধ্যে Join Link গ্রহণ করেছেন।
+            </div>`;
 
         }
-
         else if(data.status==="notfound"){
 
             result.innerHTML=`
             <div class="error">
-            ❌ EPPO অথবা NID সঠিক নয়।
-            </div>
-            `;
+                ❌ EPPO অথবা NID সঠিক নয়।
+            </div>`;
 
         }
-
         else{
 
             result.innerHTML=`
             <div class="error">
-            ⚠️ Server Error
-            </div>
-            `;
+                ⚠️ ${data.message || "Server Error"}
+            </div>`;
 
         }
 
     })
+    .catch(err=>{
 
-    .catch(function(error){
-
-        console.log(error);
+        console.error(err);
 
         result.innerHTML=`
         <div class="error">
-        ❌ সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না।
-        </div>
-        `;
+            ❌ সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না।
+            <br><small>${err.message}</small>
+        </div>`;
 
     });
 
 }
-
-</script>
-</body>
-</html>
